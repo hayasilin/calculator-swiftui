@@ -6,17 +6,25 @@
 //
 
 import SwiftUI
+import Combine
 
 let scale = UIScreen.main.bounds.width / 414
 
 struct ContentView: View {
 
-    @State private var brain: CalculatorBrain = .left("0")
+    @ObservedObject var model = CalculatorModel()
+
+    @State private var editingHistory = false
 
     var body: some View {
         VStack(spacing: 12) {
             Spacer()
-            Text(brain.output)
+            Button("History \(model.history.count)") {
+                self.editingHistory = true
+            }.sheet(isPresented: self.$editingHistory, content: {
+                HistoryView(model: self.model)
+            })
+            Text(model.brain.output)
                 .font(.system(size: 76))
                 .minimumScaleFactor(0.5)
                 .padding(.trailing, 24 * scale)
@@ -26,7 +34,7 @@ struct ContentView: View {
                     maxWidth: .infinity,
                     alignment: .trailing
                 )
-            CalculatorButtonPad(brain: $brain)
+            CalculatorButtonPad(model: model)
                 .padding(.bottom)
         }
     }
