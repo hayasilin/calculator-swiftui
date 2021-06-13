@@ -9,8 +9,6 @@ import SwiftUI
 
 struct CalculatorButtonPad: View {
 
-    var model: CalculatorModel
-
     let pad: [[CalculatorButtonItem]] = [
         [.command(.clear),
          .command(.flip),
@@ -26,7 +24,7 @@ struct CalculatorButtonPad: View {
     var body: some View {
         VStack(spacing: 8) {
             ForEach(pad, id: \.self) { row in
-                CalculatorButtonRow(row: row, model: self.model)
+                CalculatorButtonRow(row: row)
             }
         }
     }

@@ -11,7 +11,7 @@ struct CalculatorButtonRow: View {
 
     let row: [CalculatorButtonItem]
 
-    var model: CalculatorModel
+    @EnvironmentObject var model: CalculatorModel
 
     var body: some View {
 

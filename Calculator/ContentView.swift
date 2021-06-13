@@ -12,7 +12,7 @@ let scale = UIScreen.main.bounds.width / 414
 
 struct ContentView: View {
 
-    @ObservedObject var model = CalculatorModel()
+    @EnvironmentObject var model: CalculatorModel
 
     @State private var editingHistory = false
 
@@ -34,7 +34,7 @@ struct ContentView: View {
                     maxWidth: .infinity,
                     alignment: .trailing
                 )
-            CalculatorButtonPad(model: model)
+            CalculatorButtonPad()
                 .padding(.bottom)
         }
     }
@@ -42,7 +42,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(CalculatorModel())
 //        ContentView().previewDevice("iPhone SE (2nd generation)")
 //        ContentView().previewDevice("iPad Air (3rd generation)")
     }
