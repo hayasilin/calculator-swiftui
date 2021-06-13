@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CalculatorButtonRow: View {
 
+    @Binding var brain: CalculatorBrain
+
     let row: [CalculatorButtonItem]
 
     var body: some View {
@@ -18,8 +20,10 @@ struct CalculatorButtonRow: View {
                 CalculatorButton(
                     title: item.title,
                     size: item.size,
-                    backgroundColorName: item.backgroundColorName) {
-                    print("Button: \(item.title)")
+                    backgroundColorName: item.backgroundColorName,
+                    foregroundColor: item.foregroundColor
+                ) {
+                    brain = brain.apply(item: item)
                 }
             }
         }
